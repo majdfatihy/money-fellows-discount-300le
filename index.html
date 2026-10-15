@@ -16,7 +16,8 @@
     <meta name="keywords" content="Money Fellows, ماني فيلوز, كود خصم ماني فيلوز, 92962874, جمعية اونلاين, تطبيق الجمعية, جمعيات موني فيلوز, خصم 300 جنيه">
     <meta name="author" content="ماجد فتحي">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="theme-color" content="#2554C7">
+    <meta name="theme-color" content="#0A1636">
+    <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://majdfatihy.github.io/money-fellows-discount-300le/">
     <link rel="alternate" hreflang="ar-EG" href="https://majdfatihy.github.io/money-fellows-discount-300le/">
     <link rel="alternate" hreflang="x-default" href="https://majdfatihy.github.io/money-fellows-discount-300le/">
@@ -53,30 +54,41 @@
             theme: { extend: {
                 fontFamily: { cairo: ['Cairo', 'sans-serif'] },
                 colors: { mf: {
-                    blue: '#2554C7', indigo: '#364EA8', navy: '#0F2A6B', ink: '#0F1B3D',
-                    mint: '#72C654', amber: '#F6AE1E', sky: '#EEF2FB', line: '#D5DDF2', muted: '#51608A'
+                    blue: 'rgb(var(--c-blue) / <alpha-value>)', indigo: 'rgb(var(--c-indigo) / <alpha-value>)',
+                    navy: 'rgb(var(--c-navy) / <alpha-value>)', mint: 'rgb(var(--c-mint) / <alpha-value>)',
+                    amber: 'rgb(var(--c-amber) / <alpha-value>)', sky: 'rgb(var(--c-sky) / <alpha-value>)',
+                    line: 'rgb(var(--c-line) / <alpha-value>)', muted: 'rgb(var(--c-muted) / <alpha-value>)',
+                    bg: 'rgb(var(--c-bg) / <alpha-value>)', head: 'rgb(var(--c-head) / <alpha-value>)',
+                    link: 'rgb(var(--c-link) / <alpha-value>)'
                 } }
             } }
         }
     </script>
 
     <style>
-        :root { --blue:#2554C7; --indigo:#364EA8; --navy:#0F2A6B; --mint:#72C654; --amber:#F6AE1E; --sky:#EEF2FB; --line:#D5DDF2; --ink:#0F1B3D; --muted:#51608A; }
-        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
-        body { font-family: 'Cairo', sans-serif; color: var(--ink); background: linear-gradient(180deg,#fff 0%,#F4F7FD 100%) fixed; }
+        :root {
+            --c-bg: 10 22 54; --c-navy: 15 42 107; --c-sky: 24 42 98; --c-line: 60 84 156;
+            --c-muted: 169 183 222; --c-head: 238 243 255; --c-link: 143 176 255;
+            --c-blue: 37 84 199; --c-indigo: 54 78 168; --c-mint: 114 198 84; --c-amber: 246 174 30;
+            --blue: #2554C7; --amber: #F6AE1E; --line: rgba(120,150,230,.25); --head: #EEF3FF; --card: rgba(16,32,78,.55);
+        }
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; color-scheme: dark; }
+        body { font-family: 'Cairo', sans-serif; color: var(--head); background: linear-gradient(180deg,#0A1636 0%,#0C1A42 55%,#0A1636 100%) fixed; }
         #bgNet { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        #fxNet { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 45; pointer-events: none; }
         main, footer { position: relative; z-index: 1; }
         :focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
-        .seg { border: 1px solid var(--line); background: #fff; color: var(--navy); font-weight: 700; transition: .15s; }
-        .seg:hover { border-color: var(--blue); }
-        .seg[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+        .seg { border: 1px solid var(--line); background: rgba(255,255,255,.04); color: var(--head); font-weight: 700; transition: .15s; }
+        .seg:hover { border-color: #8FB0FF; }
+        .seg[aria-pressed="true"] { background: var(--blue); border-color: #5A82E8; color: #fff; }
         .btn-primary { background: var(--blue); color: #fff; font-weight: 800; transition: .15s; }
-        .btn-primary:hover { background: var(--indigo); }
-        .card { background: #fff; border: 1px solid var(--line); border-radius: 20px; }
+        .btn-primary:hover { background: #2F63E0; }
+        .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
         details > summary { list-style: none; cursor: pointer; }
         details > summary::-webkit-details-marker { display: none; }
         details[open] .chev { transform: rotate(180deg); }
-        input[type=range] { accent-color: var(--blue); }
+        input[type=range] { accent-color: #5A82E8; }
+        input::placeholder { color: rgb(169 183 222 / .7); }
         #vChips::-webkit-scrollbar { display: none; }
         @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
     </style>
@@ -84,20 +96,21 @@
 <body class="pb-20 md:pb-0">
 
     <canvas id="bgNet" aria-hidden="true"></canvas>
+    <canvas id="fxNet" aria-hidden="true"></canvas>
 
-    <div id="toast" role="status" aria-live="polite" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-mf-navy text-white px-5 py-3 rounded-full shadow-xl flex items-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-none">
+    <div id="toast" role="status" aria-live="polite" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-mf-navy border border-white/20 text-white px-5 py-3 rounded-full shadow-xl flex items-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-none">
         <i class="fa-solid fa-circle-check text-mf-mint"></i>
         <span id="toastMsg" class="font-bold text-sm">تم نسخ الكود</span>
     </div>
 
     <!-- الهيدر -->
-    <header class="bg-white/95 backdrop-blur border-b border-mf-line sticky top-0 z-40">
+    <header class="bg-mf-bg/80 backdrop-blur border-b border-mf-line sticky top-0 z-40">
         <div class="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
             <a href="#top" class="flex items-center gap-3" aria-label="Money Fellows - الرئيسية">
-                <span dir="ltr" class="font-extrabold text-xl text-mf-blue tracking-tight">Money <span class="text-mf-navy">Fellows</span></span>
+                <span dir="ltr" class="font-extrabold text-xl text-mf-link tracking-tight">Money <span class="text-mf-head">Fellows</span></span>
                 <span class="hidden lg:inline text-xs font-bold text-mf-muted border-s border-mf-line ps-3">سفير: ماجد فتحي</span>
             </a>
-            <nav class="hidden md:flex items-center gap-1 text-sm font-bold text-mf-navy" aria-label="أقسام الصفحة">
+            <nav class="hidden md:flex items-center gap-1 text-sm font-bold text-mf-head" aria-label="أقسام الصفحة">
                 <a class="px-3 py-2 rounded-lg hover:bg-mf-sky" href="#calculator">الحاسبة</a>
                 <a class="px-3 py-2 rounded-lg hover:bg-mf-sky" href="#steps">خطوات الاشتراك</a>
                 <a class="px-3 py-2 rounded-lg hover:bg-mf-sky" href="#fees">الرسوم والخصومات</a>
@@ -113,23 +126,23 @@
     <main id="top">
 
     <!-- Hero -->
-    <section class="bg-gradient-to-b from-mf-sky/60 to-transparent">
+    <section class="bg-gradient-to-b from-mf-blue/10 to-transparent">
         <div class="container mx-auto px-4 py-12 md:py-20 grid md:grid-cols-2 gap-10 items-center">
             <div>
-                <p class="inline-flex items-center gap-2 text-sm font-bold text-mf-indigo bg-white border border-mf-line rounded-full px-4 py-1.5 mb-5">
-                    <i class="fa-solid fa-shield-halved text-mf-blue"></i>
+                <p class="inline-flex items-center gap-2 text-sm font-bold text-mf-link bg-mf-sky/70 border border-mf-line rounded-full px-4 py-1.5 mb-5">
+                    <i class="fa-solid fa-shield-halved text-mf-link"></i>
                     تحت إشراف المختبر التنظيمي بالبنك المركزي المصري
                 </p>
-                <h1 class="text-3xl md:text-5xl font-extrabold leading-[1.25] text-mf-navy mb-5">
+                <h1 class="text-3xl md:text-5xl font-extrabold leading-[1.25] text-mf-head mb-5">
                     كود خصم Money Fellows: وفّر 300 جنيه على أول قسط
                 </h1>
                 <p class="text-mf-muted text-base md:text-lg leading-relaxed mb-6 max-w-xl">
                     قبض يصل إلى 120,000 جنيه في الجمعية الواحدة، وتقدر تنضم لجمعيات بإجمالي لحد 1,200,000 جنيه. أو وفّر لحد مليون جنيه في برنامج التحويش بكاش باك يصل إلى 20%.
                 </p>
                 <ul class="grid grid-cols-3 gap-3 max-w-xl text-center">
-                    <li class="card py-3 px-2"><div class="text-xl font-extrabold text-mf-blue">120,000</div><div class="text-xs text-mf-muted font-semibold">أقصى قبض للجمعية</div></li>
-                    <li class="card py-3 px-2"><div class="text-xl font-extrabold text-mf-blue">6 / 10 / 12</div><div class="text-xs text-mf-muted font-semibold">شهر مدة الجمعية</div></li>
-                    <li class="card py-3 px-2"><div class="text-xl font-extrabold text-mf-blue">125%</div><div class="text-xs text-mf-muted font-semibold">أقصى خصم للأدوار الأخيرة</div></li>
+                    <li class="card py-3 px-2"><div class="text-xl font-extrabold text-mf-link">120,000</div><div class="text-xs text-mf-muted font-semibold">أقصى قبض للجمعية</div></li>
+                    <li class="card py-3 px-2"><div class="text-xl font-extrabold text-mf-link">6 / 10 / 12</div><div class="text-xs text-mf-muted font-semibold">شهر مدة الجمعية</div></li>
+                    <li class="card py-3 px-2"><div class="text-xl font-extrabold text-mf-link">125%</div><div class="text-xs text-mf-muted font-semibold">أقصى خصم للأدوار الأخيرة</div></li>
                 </ul>
                 <p class="text-xs text-mf-muted mt-3">مبلغ القبض المتاح لكل عميل يحدده النظام الائتماني.</p>
             </div>
@@ -139,9 +152,9 @@
                 <div class="flex items-stretch gap-3 mb-5">
                     <div class="flex-1 rounded-2xl border-2 border-dashed border-mf-blue bg-mf-sky flex items-center justify-between px-5 py-3">
                         <span class="text-xs font-bold text-mf-muted">الكود</span>
-                        <span id="promoCode" dir="ltr" class="text-3xl font-extrabold tracking-widest text-mf-navy select-all">92962874</span>
+                        <span id="promoCode" dir="ltr" class="text-3xl font-extrabold tracking-widest text-mf-head select-all">92962874</span>
                     </div>
-                    <button type="button" data-copy-only class="rounded-2xl border border-mf-line px-5 font-bold text-mf-navy hover:border-mf-blue transition flex items-center gap-2" aria-label="نسخ الكود">
+                    <button type="button" data-copy-only class="rounded-2xl border border-mf-line px-5 font-bold text-mf-head hover:border-mf-blue transition flex items-center gap-2" aria-label="نسخ الكود">
                         <i class="fa-regular fa-copy"></i><span class="hidden sm:inline">نسخ</span>
                     </button>
                 </div>
@@ -154,7 +167,7 @@
                     متاح مجاناً على أندرويد وآيفون
                 </p>
                 <div class="mt-5 pt-5 border-t border-mf-line text-sm text-mf-muted leading-relaxed">
-                    <strong class="text-mf-navy">لتفعيل الخصم اكتب الكود مرتين:</strong>
+                    <strong class="text-mf-head">لتفعيل الخصم اكتب الكود مرتين:</strong>
                     عند إنشاء الحساب في خانة كود الدعوة، ثم في ملخص الجمعية في خانة "معاك برومو كود؟" قبل الضغط على تأكيد الاشتراك.
                 </div>
             </div>
@@ -165,7 +178,7 @@
     <section id="calculator" class="py-16">
         <div class="container mx-auto px-4">
             <div class="max-w-2xl mb-8">
-                <h2 class="text-2xl md:text-3xl font-extrabold text-mf-navy mb-2">حاسبة الجمعية</h2>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-mf-head mb-2">حاسبة الجمعية</h2>
                 <p class="text-mf-muted">اختر المبلغ والمدة والدور لتعرف القسط الشهري وتأثير رسوم الدور وخصم الكود.</p>
             </div>
 
@@ -173,8 +186,8 @@
                 <div class="card p-6 lg:col-span-3 space-y-6">
                     <div>
                         <div class="flex items-baseline justify-between mb-2">
-                            <label for="calcAmount" class="font-bold text-mf-navy">مبلغ القبض</label>
-                            <output id="calcAmountOut" for="calcAmount" class="text-xl font-extrabold text-mf-blue"></output>
+                            <label for="calcAmount" class="font-bold text-mf-head">مبلغ القبض</label>
+                            <output id="calcAmountOut" for="calcAmount" class="text-xl font-extrabold text-mf-link"></output>
                         </div>
                         <input id="calcAmount" type="range" min="3000" max="120000" step="3000" value="24000" class="w-full" dir="ltr">
                         <div class="flex justify-between text-xs text-mf-muted mt-1" dir="ltr"><span>3,000</span><span>120,000</span></div>
@@ -182,7 +195,7 @@
                     </div>
 
                     <div>
-                        <div class="font-bold text-mf-navy mb-2">مدة الجمعية</div>
+                        <div class="font-bold text-mf-head mb-2">مدة الجمعية</div>
                         <div class="grid grid-cols-3 gap-3" id="calcMonths">
                             <button type="button" class="seg rounded-xl py-3" data-m="6" aria-pressed="false">6 شهور</button>
                             <button type="button" class="seg rounded-xl py-3" data-m="10" aria-pressed="true">10 شهور</button>
@@ -191,12 +204,12 @@
                     </div>
 
                     <div>
-                        <div class="font-bold text-mf-navy mb-2">دور القبض</div>
+                        <div class="font-bold text-mf-head mb-2">دور القبض</div>
                         <div id="calcRoles" class="grid grid-cols-3 sm:grid-cols-4 gap-2"></div>
                     </div>
                 </div>
 
-                <div class="lg:col-span-2 rounded-[20px] bg-mf-navy text-white p-6 flex flex-col" aria-live="polite">
+                <div class="lg:col-span-2 rounded-[20px] bg-mf-navy/90 border border-white/10 text-white p-6 flex flex-col" aria-live="polite">
                     <h3 class="font-extrabold text-lg mb-4">ملخص تقديري</h3>
                     <dl class="space-y-3 text-sm flex-1">
                         <div class="flex justify-between gap-3"><dt class="text-white/70">القسط الشهري</dt><dd id="rMonthly" class="font-extrabold"></dd></div>
@@ -207,7 +220,7 @@
                         <div class="border-t border-white/15 pt-3 flex justify-between gap-3 text-base"><dt id="rNetLabel" class="font-bold">الصافي</dt><dd id="rNet" class="font-extrabold"></dd></div>
                     </dl>
                     <p id="rHint" class="text-xs text-white/60 mt-4 leading-relaxed"></p>
-                    <a href="https://moneyfellows.go.link/?adj_t=1kkal626&adj_label=maged_fat_92962874" target="_blank" rel="sponsored noopener" data-copy class="mt-5 rounded-xl bg-white text-mf-navy font-extrabold text-center py-3 hover:bg-mf-sky transition">اشترك وطبّق الخصم</a>
+                    <a href="https://moneyfellows.go.link/?adj_t=1kkal626&adj_label=maged_fat_92962874" target="_blank" rel="sponsored noopener" data-copy class="mt-5 rounded-xl bg-white text-[#0F2A6B] font-extrabold text-center py-3 hover:bg-[#EEF3FF] transition">اشترك وطبّق الخصم</a>
                 </div>
             </div>
             <p class="text-xs text-mf-muted mt-4">الأرقام تقديرية. رسوم الدور نسبة من مبلغ القبض، وخصم الدور نسبة من القسط. التقدير لا يشمل خصم السداد المبكر (حتى 4% من القسط) ولا الكوبونات الموسمية. التفاصيل النهائية تظهر في ملخص الجمعية داخل التطبيق.</p>
@@ -215,47 +228,47 @@
     </section>
 
     <!-- الخطوات -->
-    <section id="steps" class="py-16 bg-mf-sky/75 border-y border-mf-line">
+    <section id="steps" class="py-16 bg-mf-sky/35 border-y border-mf-line">
         <div class="container mx-auto px-4">
             <div class="max-w-2xl mb-10">
-                <h2 class="text-2xl md:text-3xl font-extrabold text-mf-navy mb-2">خطوات الاشتراك في الجمعية</h2>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-mf-head mb-2">خطوات الاشتراك في الجمعية</h2>
                 <p class="text-mf-muted">أربع خطوات من التحميل حتى وصول العقد.</p>
             </div>
             <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <li class="card p-6">
                     <span class="w-10 h-10 rounded-xl bg-mf-blue text-white font-extrabold flex items-center justify-center mb-4">1</span>
-                    <h3 class="font-extrabold text-lg text-mf-navy mb-3">إنشاء الحساب</h3>
+                    <h3 class="font-extrabold text-lg text-mf-head mb-3">إنشاء الحساب</h3>
                     <ul class="space-y-2 text-sm text-mf-muted leading-relaxed">
-                        <li>حمّل التطبيق من <a href="https://moneyfellows.go.link/?adj_t=1kkal626&adj_label=maged_fat_92962874" target="_blank" rel="sponsored noopener" class="text-mf-blue font-bold underline">الرابط الرسمي</a>.</li>
+                        <li>حمّل التطبيق من <a href="https://moneyfellows.go.link/?adj_t=1kkal626&adj_label=maged_fat_92962874" target="_blank" rel="sponsored noopener" class="text-mf-link font-bold underline">الرابط الرسمي</a>.</li>
                         <li>املأ الاسم الأول والأخير والبريد الإلكتروني.</li>
-                        <li class="bg-mf-sky rounded-lg p-2 text-mf-navy font-semibold">أدخل كود الدعوة <span dir="ltr" class="font-extrabold">92962874</span> وستظهر رسالة "تم تطبيق البرومو كود بنجاح".</li>
+                        <li class="bg-mf-sky rounded-lg p-2 text-mf-head font-semibold">أدخل كود الدعوة <span dir="ltr" class="font-extrabold">92962874</span> وستظهر رسالة "تم تطبيق البرومو كود بنجاح".</li>
                         <li>أدخل رقم موبايلك الأساسي وفعّله بكود التأكيد.</li>
                     </ul>
                 </li>
                 <li class="card p-6">
                     <span class="w-10 h-10 rounded-xl bg-mf-blue text-white font-extrabold flex items-center justify-center mb-4">2</span>
-                    <h3 class="font-extrabold text-lg text-mf-navy mb-3">اختيار الجمعية</h3>
+                    <h3 class="font-extrabold text-lg text-mf-head mb-3">اختيار الجمعية</h3>
                     <ul class="space-y-2 text-sm text-mf-muted leading-relaxed">
                         <li>اضغط "اشترك" ثم "اشترك في جمعية".</li>
                         <li>اختر المبلغ (مضاعفات 3,000 حتى 120,000 جنيه) والمدة: 6 أو 10 أو 12 شهراً.</li>
                         <li>اختر دورك: الأولى لأسرع قبض، الوسطى بدون رسوم، الأخيرة بخصومات.</li>
-                        <li class="bg-mf-sky rounded-lg p-2 text-mf-navy font-semibold">في ملخص الجمعية اكتب <span dir="ltr" class="font-extrabold">92962874</span> في خانة "معاك برومو كود؟" ثم "تأكيد الاشتراك".</li>
+                        <li class="bg-mf-sky rounded-lg p-2 text-mf-head font-semibold">في ملخص الجمعية اكتب <span dir="ltr" class="font-extrabold">92962874</span> في خانة "معاك برومو كود؟" ثم "تأكيد الاشتراك".</li>
                     </ul>
                 </li>
                 <li class="card p-6">
                     <span class="w-10 h-10 rounded-xl bg-mf-blue text-white font-extrabold flex items-center justify-center mb-4">3</span>
-                    <h3 class="font-extrabold text-lg text-mf-navy mb-3">طريقة القبض</h3>
+                    <h3 class="font-extrabold text-lg text-mf-head mb-3">طريقة القبض</h3>
                     <ul class="space-y-2 text-sm text-mf-muted leading-relaxed">
                         <li>من "المدفوعات" اختر "تغيير طريقة القبض".</li>
-                        <li><strong class="text-mf-navy">تحويل بنكي:</strong> مباشرة لحسابك، بدون رسوم.</li>
-                        <li><strong class="text-mf-navy">كارت مدفوع مقدماً:</strong> بدون رسوم وبحد أقصى 100,000 جنيه.</li>
-                        <li><strong class="text-mf-navy">محفظة إلكترونية:</strong> مثل فودافون كاش. أو كارت Money Fellows.</li>
+                        <li><strong class="text-mf-head">تحويل بنكي:</strong> مباشرة لحسابك، بدون رسوم.</li>
+                        <li><strong class="text-mf-head">كارت مدفوع مقدماً:</strong> بدون رسوم وبحد أقصى 100,000 جنيه.</li>
+                        <li><strong class="text-mf-head">محفظة إلكترونية:</strong> مثل فودافون كاش. أو كارت Money Fellows.</li>
                         <li>يمكن التغيير قبل شهر القبض، ويسري على القبض القادم.</li>
                     </ul>
                 </li>
                 <li class="card p-6">
                     <span class="w-10 h-10 rounded-xl bg-mf-blue text-white font-extrabold flex items-center justify-center mb-4">4</span>
-                    <h3 class="font-extrabold text-lg text-mf-navy mb-3">تأكيد الهوية</h3>
+                    <h3 class="font-extrabold text-lg text-mf-head mb-3">تأكيد الهوية</h3>
                     <ul class="space-y-2 text-sm text-mf-muted leading-relaxed">
                         <li>من "حسابي" اختر "مستنداتي".</li>
                         <li>ارفع صورة البطاقة الشخصية (وش وضهر)، سارية وواضحة وفي إضاءة جيدة، طبقاً لتعليمات البنك المركزي.</li>
@@ -270,7 +283,7 @@
     <section id="fees" class="py-16">
         <div class="container mx-auto px-4">
             <div class="max-w-2xl mb-8">
-                <h2 class="text-2xl md:text-3xl font-extrabold text-mf-navy mb-2">رسوم وخصومات كل دور</h2>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-mf-head mb-2">رسوم وخصومات كل دور</h2>
                 <p class="text-mf-muted">الأدوار الأولى لأسرع قبض وعليها رسوم إدارية، والوسطى بدون رسوم، والأخيرة لأكبر عائد بخصومات تصل إلى 125%.</p>
             </div>
             <div class="flex gap-3 mb-5" role="group" aria-label="مدة الجمعية">
@@ -280,23 +293,23 @@
             </div>
             <div id="circle-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3"></div>
             <div class="flex flex-wrap gap-x-5 gap-y-2 mt-5 text-xs font-semibold text-mf-muted">
-                <span class="flex items-center gap-2"><i class="w-3 h-3 rounded bg-[#FFF3D6] border border-mf-amber"></i>رسوم إدارية</span>
-                <span class="flex items-center gap-2"><i class="w-3 h-3 rounded bg-mf-sky border border-mf-blue"></i>بدون رسوم</span>
-                <span class="flex items-center gap-2"><i class="w-3 h-3 rounded bg-[#E6F6DF] border border-mf-mint"></i>خصم على أول قسط</span>
+                <span class="flex items-center gap-2"><i class="w-3 h-3 rounded bg-mf-amber/30 border border-mf-amber"></i>رسوم إدارية</span>
+                <span class="flex items-center gap-2"><i class="w-3 h-3 rounded bg-mf-blue/30 border border-mf-blue"></i>بدون رسوم</span>
+                <span class="flex items-center gap-2"><i class="w-3 h-3 rounded bg-mf-mint/30 border border-mf-mint"></i>خصم على أول قسط</span>
             </div>
-            <p class="text-sm text-mf-navy font-bold mt-4"><i class="fa-solid fa-circle-info text-mf-blue ms-1"></i>يتم توزيع الخصم على أول 4 أقساط في الجمعية.</p>
+            <p class="text-sm text-mf-head font-bold mt-4"><i class="fa-solid fa-circle-info text-mf-link ms-1"></i>يتم توزيع الخصم على أول 4 أقساط في الجمعية.</p>
             <div class="grid sm:grid-cols-2 gap-4 mt-8">
                 <div class="card p-5 flex gap-4">
-                    <span class="shrink-0 w-11 h-11 rounded-xl bg-[#E6F6DF] text-[#245A12] flex items-center justify-center"><i class="fa-solid fa-bolt"></i></span>
+                    <span class="shrink-0 w-11 h-11 rounded-xl bg-mf-mint/20 text-[#B9EFA3] flex items-center justify-center"><i class="fa-solid fa-bolt"></i></span>
                     <div>
-                        <h3 class="font-extrabold text-mf-navy mb-1">سدّد القسط بدري ووفّر</h3>
+                        <h3 class="font-extrabold text-mf-head mb-1">سدّد القسط بدري ووفّر</h3>
                         <p class="text-sm text-mf-muted leading-relaxed">السداد المبكر للقسط يمنحك خصماً يصل إلى 4% من قيمة القسط. التفاصيل داخل التطبيق.</p>
                     </div>
                 </div>
                 <div class="card p-5 flex gap-4">
-                    <span class="shrink-0 w-11 h-11 rounded-xl bg-[#FFF3D6] text-[#6B4A00] flex items-center justify-center"><i class="fa-solid fa-ticket"></i></span>
+                    <span class="shrink-0 w-11 h-11 rounded-xl bg-mf-amber/20 text-[#FFD98A] flex items-center justify-center"><i class="fa-solid fa-ticket"></i></span>
                     <div>
-                        <h3 class="font-extrabold text-mf-navy mb-1">كوبونات موسمية</h3>
+                        <h3 class="font-extrabold text-mf-head mb-1">كوبونات موسمية</h3>
                         <p class="text-sm text-mf-muted leading-relaxed">المنصة تقدم كل فترة وموسم كوبونات خصم على الرسوم وعلى الاشتراك في الجمعيات.</p>
                     </div>
                 </div>
@@ -305,70 +318,70 @@
     </section>
 
     <!-- الأسئلة الشائعة -->
-    <section id="faq" class="py-16 bg-mf-sky/75 border-y border-mf-line">
+    <section id="faq" class="py-16 bg-mf-sky/35 border-y border-mf-line">
         <div class="container mx-auto px-4 max-w-3xl">
-            <h2 class="text-2xl md:text-3xl font-extrabold text-mf-navy mb-8">أسئلة شائعة عن جمعيات Money Fellows</h2>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-mf-head mb-8">أسئلة شائعة عن جمعيات Money Fellows</h2>
             <div class="space-y-3">
                 <details class="card px-5 py-4 group">
-                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-navy">
+                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-head">
                         <h3 class="text-base">كيف أستخدم كود الخصم 92962874؟</h3>
-                        <i class="fa-solid fa-chevron-down chev text-mf-blue text-sm transition"></i>
+                        <i class="fa-solid fa-chevron-down chev text-mf-link text-sm transition"></i>
                     </summary>
                     <p class="text-mf-muted leading-relaxed mt-3">اكتب الكود في مكانين: عند إنشاء الحساب في خانة كود الدعوة الخاص بسفير Money Fellows، ثم في صفحة ملخص الجمعية في خانة &quot;معاك برومو كود؟&quot; قبل الضغط على تأكيد الاشتراك.</p>
                 </details>
                 <details class="card px-5 py-4 group">
-                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-navy">
+                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-head">
                         <h3 class="text-base">كم قيمة الخصم؟</h3>
-                        <i class="fa-solid fa-chevron-down chev text-mf-blue text-sm transition"></i>
+                        <i class="fa-solid fa-chevron-down chev text-mf-link text-sm transition"></i>
                     </summary>
                     <p class="text-mf-muted leading-relaxed mt-3">300 جنيه خصم على أول قسط عند الاشتراك بكود الدعوة 92962874.</p>
                 </details>
                 <details class="card px-5 py-4 group">
-                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-navy">
+                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-head">
                         <h3 class="text-base">ما الفرق بين الأدوار الأولى والوسطى والأخيرة؟</h3>
-                        <i class="fa-solid fa-chevron-down chev text-mf-blue text-sm transition"></i>
+                        <i class="fa-solid fa-chevron-down chev text-mf-link text-sm transition"></i>
                     </summary>
                     <p class="text-mf-muted leading-relaxed mt-3">الأدوار الأولى لأسرع قبض وعليها رسوم إدارية تصل إلى 17%. الأدوار الوسطى بدون رسوم. الأدوار الأخيرة لأكبر عائد وعليها خصم يصل إلى 125% من القسط الأول، ويتم توزيع الخصم على أول 4 أقساط.</p>
                 </details>
                 <details class="card px-5 py-4 group">
-                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-navy">
+                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-head">
                         <h3 class="text-base">ما أقصى مبلغ قبض يمكنني الاشتراك فيه؟</h3>
-                        <i class="fa-solid fa-chevron-down chev text-mf-blue text-sm transition"></i>
+                        <i class="fa-solid fa-chevron-down chev text-mf-link text-sm transition"></i>
                     </summary>
                     <p class="text-mf-muted leading-relaxed mt-3">يصل القبض إلى 120,000 جنيه في الجمعية الواحدة، ويمكنك الانضمام لجمعيات بإجمالي لحد 1,200,000 جنيه. أما برنامج التحويش فيصل إلى مليون جنيه بكاش باك يصل إلى 20%. مبلغ القبض المتاح لكل عميل يحدده النظام الائتماني.</p>
                 </details>
                 <details class="card px-5 py-4 group">
-                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-navy">
+                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-head">
                         <h3 class="text-base">ما طرق استلام القبض؟</h3>
-                        <i class="fa-solid fa-chevron-down chev text-mf-blue text-sm transition"></i>
+                        <i class="fa-solid fa-chevron-down chev text-mf-link text-sm transition"></i>
                     </summary>
                     <p class="text-mf-muted leading-relaxed mt-3">تحويل بنكي مباشر لحسابك بدون رسوم، أو كارت مدفوع مقدماً بدون رسوم بحد أقصى 100,000 جنيه، أو محفظة إلكترونية مثل فودافون كاش، أو كارت Money Fellows.</p>
                 </details>
                 <details class="card px-5 py-4 group">
-                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-navy">
+                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-head">
                         <h3 class="text-base">هل أستطيع تغيير طريقة القبض؟</h3>
-                        <i class="fa-solid fa-chevron-down chev text-mf-blue text-sm transition"></i>
+                        <i class="fa-solid fa-chevron-down chev text-mf-link text-sm transition"></i>
                     </summary>
                     <p class="text-mf-muted leading-relaxed mt-3">نعم، من &quot;المدفوعات&quot; ثم &quot;تغيير طريقة القبض&quot; قبل شهر القبض. التغيير يسري على القبض القادم وليس الحالي.</p>
                 </details>
                 <details class="card px-5 py-4 group">
-                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-navy">
+                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-head">
                         <h3 class="text-base">ما المستندات المطلوبة للاشتراك؟</h3>
-                        <i class="fa-solid fa-chevron-down chev text-mf-blue text-sm transition"></i>
+                        <i class="fa-solid fa-chevron-down chev text-mf-link text-sm transition"></i>
                     </summary>
                     <p class="text-mf-muted leading-relaxed mt-3">صورة بطاقة الرقم القومي سارية (وش وضهر) بإضاءة واضحة طبقاً لتعليمات البنك المركزي، ثم إدخال عنوانك ليصل عقد الجمعية إلى بيتك.</p>
                 </details>
                 <details class="card px-5 py-4 group">
-                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-navy">
+                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-head">
                         <h3 class="text-base">هل في خصم لو سددت القسط بدري؟</h3>
-                        <i class="fa-solid fa-chevron-down chev text-mf-blue text-sm transition"></i>
+                        <i class="fa-solid fa-chevron-down chev text-mf-link text-sm transition"></i>
                     </summary>
                     <p class="text-mf-muted leading-relaxed mt-3">نعم، السداد المبكر للقسط يمنحك خصماً يصل إلى 4% من قيمة القسط. مواعيد الخصم وتفاصيله تظهر في التطبيق.</p>
                 </details>
                 <details class="card px-5 py-4 group">
-                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-navy">
+                    <summary class="flex items-center justify-between gap-4 font-bold text-mf-head">
                         <h3 class="text-base">هل تقدم المنصة كوبونات خصم؟</h3>
-                        <i class="fa-solid fa-chevron-down chev text-mf-blue text-sm transition"></i>
+                        <i class="fa-solid fa-chevron-down chev text-mf-link text-sm transition"></i>
                     </summary>
                     <p class="text-mf-muted leading-relaxed mt-3">نعم، تقدم Money Fellows كل فترة وموسم كوبونات خصم على رسوم الأدوار وعلى الاشتراك في الجمعيات. تابع إشعارات التطبيق وهذه الصفحة لمعرفة العروض الحالية.</p>
                 </details>
@@ -381,12 +394,12 @@
         <div class="container mx-auto px-4">
             <div class="max-w-6xl mx-auto">
                 <div class="mb-8">
-                    <h2 class="text-2xl md:text-3xl font-extrabold text-mf-navy mb-2">فيديوهات الشرح والاستفسارات</h2>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-mf-head mb-2">فيديوهات الشرح والاستفسارات</h2>
                     <p class="text-mf-muted">ابحث عن مشكلتك أو اختر القسم المناسب وشاهد الشرح مباشرة.</p>
                 </div>
                 <div class="relative mb-4">
                     <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-mf-muted"></i>
-                    <input id="vSearch" type="search" aria-label="ابحث في الفيديوهات" placeholder="ابحث: كارت، تأخير، دعوات، خصم 300..." class="w-full bg-white border border-mf-line rounded-2xl py-3.5 pr-11 pl-4 outline-none focus:border-mf-blue">
+                    <input id="vSearch" type="search" aria-label="ابحث في الفيديوهات" placeholder="ابحث: كارت، تأخير، دعوات، خصم 300..." class="w-full bg-mf-sky/60 text-mf-head border border-mf-line rounded-2xl py-3.5 pr-11 pl-4 outline-none focus:border-mf-blue">
                 </div>
                 <div id="vChips" class="flex gap-2 overflow-x-auto pb-3 mb-5" style="scrollbar-width:none"></div>
                 <div id="vGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
@@ -414,16 +427,16 @@
 
     </main>
 
-    <footer class="bg-white/85 backdrop-blur-sm border-t border-mf-line py-10 text-center">
+    <footer class="bg-mf-bg/80 backdrop-blur-sm border-t border-mf-line py-10 text-center">
         <div class="container mx-auto px-4 max-w-2xl">
-            <div dir="ltr" class="font-extrabold text-lg text-mf-blue mb-3">Money <span class="text-mf-navy">Fellows</span></div>
+            <div dir="ltr" class="font-extrabold text-lg text-mf-link mb-3">Money <span class="text-mf-head">Fellows</span></div>
             <p class="text-sm text-mf-muted leading-relaxed mb-3">
                 صفحة سفير Money Fellows: ماجد فتحي. التطبيق يعمل تحت إشراف المختبر التنظيمي بالبنك المركزي المصري.
             </p>
             <p class="text-xs text-mf-muted leading-relaxed mb-4">
                 الرسوم والخصومات والمبالغ حسب بيانات برنامج السفراء وقابلة للتغيير، والمرجع النهائي هو التطبيق. الروابط في هذه الصفحة رابط إحالة، وقد يحصل السفير على مكافأة عند التسجيل من خلاله.
             </p>
-            <a href="https://moneyfellows.go.link/?adj_t=1kkal626&adj_label=maged_fat_92962874" target="_blank" rel="sponsored noopener" data-copy class="text-mf-blue font-bold text-sm hover:underline">رابط تحميل التطبيق</a>
+            <a href="https://moneyfellows.go.link/?adj_t=1kkal626&adj_label=maged_fat_92962874" target="_blank" rel="sponsored noopener" data-copy class="text-mf-link font-bold text-sm hover:underline">رابط تحميل التطبيق</a>
             <div id="footerSocial" class="flex justify-center gap-3 mt-5"></div>
             <p dir="ltr" class="text-xs text-mf-muted mt-4">© 2026 Majed Fathy. Money Fellows is a trademark of its owner.</p>
         </div>
@@ -435,10 +448,10 @@
     </a>
 
     <!-- شريط الموبايل -->
-    <div class="fixed bottom-0 inset-x-0 bg-white border-t border-mf-line p-3 md:hidden z-40 flex items-center gap-3">
+    <div class="fixed bottom-0 inset-x-0 bg-mf-bg/95 backdrop-blur border-t border-mf-line p-3 md:hidden z-40 flex items-center gap-3">
         <button type="button" data-copy-only class="shrink-0 rounded-xl border border-mf-line bg-mf-sky px-3 py-2 text-center" aria-label="نسخ كود الخصم">
             <span class="block text-[10px] font-bold text-mf-muted">كود خصم 300</span>
-            <span dir="ltr" class="font-extrabold text-mf-navy text-sm">92962874 <i class="fa-regular fa-copy text-xs"></i></span>
+            <span dir="ltr" class="font-extrabold text-mf-head text-sm">92962874 <i class="fa-regular fa-copy text-xs"></i></span>
         </button>
         <a href="https://moneyfellows.go.link/?adj_t=1kkal626&adj_label=maged_fat_92962874" target="_blank" rel="sponsored noopener" data-copy class="btn-primary flex-1 rounded-xl py-3 text-center text-sm flex items-center justify-center gap-2">
             <i class="fa-solid fa-download"></i><span>حمّل التطبيق</span>
@@ -492,9 +505,9 @@
         const roleType = r => r.d ? 'disc' : (r.f ? 'fee' : 'free');
         const roleText = r => r.d ? `خصم ${r.d}%` : (r.f ? `رسوم ${r.f}%` : 'بدون رسوم');
         const TONE = {
-            fee:  'bg-[#FFF3D6] border-mf-amber/60 text-[#6B4A00]',
-            free: 'bg-mf-sky border-mf-blue/40 text-mf-navy',
-            disc: 'bg-[#E6F6DF] border-mf-mint text-[#245A12]'
+            fee:  'bg-mf-amber/15 border-mf-amber/50 text-[#FFD98A]',
+            free: 'bg-mf-blue/20 border-mf-blue/50 text-[#CFE0FF]',
+            disc: 'bg-mf-mint/15 border-mf-mint/50 text-[#B9EFA3]'
         };
         const fmt = n => Math.round(n).toLocaleString('en-US') + ' ج.م';
 
@@ -562,50 +575,49 @@
 
         /* ========= الفيديوهات ========= */
         const VIDEO_CATS = {
-            all:    { label: 'الكل',                icon: 'fa-layer-group' },
-            signup: { label: 'التسجيل وخصم 300',    icon: 'fa-user-plus' },
-            circle: { label: 'الجمعية والأدوار',    icon: 'fa-users' },
-            pay:    { label: 'سداد الأقساط',        icon: 'fa-money-bill-wave' },
-            payout: { label: 'القبض',               icon: 'fa-hand-holding-dollar' },
-            card:   { label: 'الكارت',              icon: 'fa-credit-card' },
-            late:   { label: 'التأخير والانسحاب',   icon: 'fa-clock' },
-            invite: { label: 'الدعوات والإحالات',   icon: 'fa-gift' }
+            all:    { label: 'الكل',                 icon: 'fa-layer-group' },
+            signup: { label: 'التسجيل وخصم 300',     icon: 'fa-user-plus' },
+            circle: { label: 'الأدوار والخصومات',    icon: 'fa-percent' },
+            pay:    { label: 'السداد والقبض',        icon: 'fa-money-bill-wave' },
+            card:   { label: 'الكارت',               icon: 'fa-credit-card' },
+            late:   { label: 'التأخير والانسحاب',    icon: 'fa-clock' }
         };
+        /* d = مدة الفيديو */
         const VIDEOS = [
-            { id: 'xu9CUoeofDE', c: 'signup', t: 'الاشتراك في Money Fellows خطوة بخطوة' },
-            { id: 'iF5Cd2L3OcI', c: 'signup', t: 'الاشتراك خطوة بخطوة للمبتدئين' },
-            { id: 'SbGjn5v-OqU', c: 'signup', t: 'خصم 300 جنيه هدية عند اشتراكك' },
-            { id: 'JFJoZ_ixrww', c: 'signup', t: 'أول مرة تسجل؟ أول 300 جنيه هدية' },
-            { id: 'pOXeO51O_mk', c: 'signup', t: 'التسجيل والحصول على خصم 300 جنيه' },
-            { id: 'ybC3b9sAbfU', c: 'signup', t: 'طريقة التسجيل والحصول على خصم 300 جنيه' },
-            { id: 'Wuih38hLs2A', c: 'signup', t: 'كود الدعوة وخصم 300 جنيه' },
-            { id: '5DVgpDAvsyM', c: 'signup', t: 'بروموكود خصم 300 جنيه من أول قسط' },
-            { id: 'RBDIMvdh0bA', c: 'signup', t: 'إزاي تستفيد من كود الخصم' },
-            { id: 'bBQhFs5UyZU', c: 'signup', t: 'مشكلة كود الخصم لا يعمل' },
-            { id: 'uKTA32z_wbI', c: 'circle', t: 'إزاي تحصل على خصم 125%؟ دليل الرسوم' },
-            { id: '3Y8Ra_WW5VY', c: 'circle', t: 'خصومات وفوائد كل دور في الجمعية' },
-            { id: 'F7ncMJWmOr4', c: 'circle', t: 'إزاي تقبض الدور الأول (أوفر الجمعية بدورين)' },
-            { id: 'rKnYkqnJ_A0', c: 'circle', t: 'الحد الأقصى للقبض في كل دور' },
-            { id: 's_y6NEOU0SQ', c: 'pay', t: 'سداد القسط وأقل طرق السداد رسوماً' },
-            { id: 'nGSJo86RC-k', c: 'pay', t: 'سداد القسط بمحفظة إلكترونية أو فيزا أو فوري' },
-            { id: 'qKb4y_gTpQE', c: 'pay', t: 'تفاصيل جمعيتك وطرق سداد القسط' },
-            { id: '13mEHFKi150', c: 'pay', t: 'إشعار "حدك الأقصى للقسط لا يسمح"' },
-            { id: '7im3042itys', c: 'payout', t: 'تغيير طريقة القبض' },
-            { id: 'YixkchfNiM8', c: 'payout', t: 'قسّم ووفّر: تقسيم القبض على دفعتين بأقل رسوم' },
-            { id: 'oIYP3ZmGEPI', c: 'card', t: 'طريقة شحن الكارت' },
-            { id: 'TpIP5442ouA', c: 'card', t: 'تفعيل الرقم السري للكارت وطريقة الإيداع' },
-            { id: 'Vj2gYyONoRM', c: 'card', t: 'تغيير الرقم السري للكارت' },
-            { id: 's82IJBcq4Fw', c: 'card', t: 'حدود السحب والإيداع والرسوم' },
-            { id: 'w_2_IAVlOs4', c: 'card', t: 'حماية الكارت لو ضاع منك' },
-            { id: 'qcOvXRIixvI', c: 'late', t: 'التأخير عن السداد ورسوم الانسحاب والتأخير' },
-            { id: 'XPLwp7xxS0g', c: 'late', t: 'غرامات التأخير' },
-            { id: 'GW0l-hGjtVQ', c: 'late', t: 'فسخ العقد عند عدم السداد قبل القبض' },
-            { id: 'Q1GGmbApLwc', c: 'late', t: 'الخروج من الجمعية بعد الاشتراك مباشرة' },
-            { id: 'dyvkOcHXwig', c: 'invite', t: 'رصيد الدعوات: يُخصم من الجمعية الجديدة أم القديمة؟' },
-            { id: 'vGtqYuT9ryk', c: 'invite', t: 'طريقة خصم هدية الإحالات من الأقساط' },
-            { id: '3wh8xHibaZ0', c: 'invite', t: 'كيف تُخصم الدعوات من القسط' },
-            { id: 'sy0XKVn1PRo', c: 'invite', t: 'كل الخصومات على الأقساط من الدعوات' }
+            { id: 'iF5Cd2L3OcI', c: 'signup', d: '10:56', t: 'الاشتراك في MoneyFellows خطوة بخطوة للمبتدئين' },
+            { id: 'xu9CUoeofDE', c: 'signup', d: '5:56',  t: 'الاشتراك في Money Fellows (شرح خطوة بخطوة)' },
+            { id: 'ybC3b9sAbfU', c: 'signup', d: '4:11',  t: 'طريقة التسجيل والحصول على خصم 300 جنيه' },
+            { id: '5DVgpDAvsyM', c: 'signup', d: '0:44',  t: 'بروموكود خصم 300 جنيه من أول قسط' },
+
+            { id: '3Y8Ra_WW5VY', c: 'circle', d: '4:50',  t: 'خصومات وفوائد كل دور في الجمعية' },
+            { id: 'uKTA32z_wbI', c: 'circle', d: '4:30',  t: 'إزاي تحصل على خصم 125%؟ دليل الرسوم' },
+            { id: 'F7ncMJWmOr4', c: 'circle', d: '3:47',  t: 'إزاي تقبض الدور الأول (أوفر الجمعية بدورين)' },
+            { id: 'sy0XKVn1PRo', c: 'circle', d: '3:33',  t: 'كل الخصومات على الأقساط من الدعوات وطريقة استخدامها' },
+            { id: 'rKnYkqnJ_A0', c: 'circle', d: '1:30',  t: 'الحد الأقصى للقبض في كل دور' },
+
+            { id: 'nGSJo86RC-k', c: 'pay',    d: '9:39',  t: 'سداد القسط بمحفظة إلكترونية أو فيزا أو فوري' },
+            { id: 'qKb4y_gTpQE', c: 'pay',    d: '3:32',  t: 'تفاصيل جمعيتك وطرق سداد القسط' },
+            { id: '7im3042itys', c: 'pay',    d: '1:55',  t: 'تغيير طريقة القبض' },
+            { id: '9j4jqxcJZqA', c: 'pay',    d: '1:26',  t: 'إشعار "حدك الأقصى للقسط لا يسمح"' },
+            { id: 's_y6NEOU0SQ', c: 'pay',    d: '1:22',  t: 'سداد القسط وأقل طرق السداد رسوماً' },
+
+            { id: 'Vj2gYyONoRM', c: 'card',   d: '2:49',  t: 'تغيير الرقم السري للكارت' },
+            { id: 'oIYP3ZmGEPI', c: 'card',   d: '1:59',  t: 'طريقة شحن الكارت' },
+            { id: 'TpIP5442ouA', c: 'card',   d: '1:55',  t: 'تفعيل الرقم السري للكارت وطريقة الإيداع' },
+            { id: 's82IJBcq4Fw', c: 'card',   d: '1:29',  t: 'حدود السحب والإيداع والرسوم' },
+            { id: 'w_2_IAVlOs4', c: 'card',   d: '1:10',  t: 'حماية كارت الفيزا لو ضاع منك' },
+
+            { id: 'XPLwp7xxS0g', c: 'late',   d: '7:26',  t: 'غرامات التأخير: احذر التأخيرات' },
+            { id: 'Q1GGmbApLwc', c: 'late',   d: '1:29',  t: 'الخروج من الجمعية بعد الاشتراك مباشرة' }
         ];
+        const THUMBS = ['maxresdefault', 'sddefault', 'hqdefault'];   /* من الأعلى جودة إلى الأقل */
+        function thumbNext(img) {
+            const i = +img.dataset.i + 1;
+            if (i >= THUMBS.length) { img.remove(); return; }
+            img.dataset.i = i;
+            img.src = `https://i.ytimg.com/vi/${img.dataset.id}/${THUMBS[i]}.jpg`;
+        }
+        function thumbCheck(img) { if (img.naturalWidth && img.naturalWidth <= 130) thumbNext(img); }   /* صورة بديلة صغيرة = غير متوفرة */
         const V_PAGE = 9;
         let vCat = 'all', vQuery = '', vLimit = V_PAGE;
         const vNorm = s => s.toLowerCase().replace(/[\u064B-\u0652]/g, '').replace(/[أإآ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه');
@@ -624,12 +636,13 @@
             document.getElementById('vGrid').innerHTML = shown.map(v => `
                 <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener noreferrer" class="group card overflow-hidden hover:border-mf-blue hover:shadow-md transition flex flex-col">
                     <div class="relative aspect-video bg-gradient-to-br from-mf-blue to-mf-navy">
-                        <img src="https://i.ytimg.com/vi/${v.id}/mqdefault.jpg" alt="" loading="lazy" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()">
+                        <img src="https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg" data-id="${v.id}" data-i="0" alt="" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" onload="thumbCheck(this)" onerror="thumbNext(this)">
+                        <span dir="ltr" class="absolute bottom-2 left-2 z-10 bg-black/75 text-white text-xs font-bold px-2 py-0.5 rounded">${v.d}</span>
                         <span class="absolute inset-0 flex items-center justify-center"><span class="w-12 h-12 rounded-full bg-white/90 text-red-600 flex items-center justify-center shadow group-hover:scale-110 transition"><i class="fa-solid fa-play pr-0.5"></i></span></span>
                     </div>
                     <div class="p-4 flex-1 flex flex-col gap-2">
-                        <span class="text-xs font-bold text-mf-blue"><i class="fa-solid ${VIDEO_CATS[v.c].icon} ms-1"></i>${VIDEO_CATS[v.c].label}</span>
-                        <h3 class="font-bold text-mf-ink leading-snug">${v.t}</h3>
+                        <span class="text-xs font-bold text-mf-link"><i class="fa-solid ${VIDEO_CATS[v.c].icon} ms-1"></i>${VIDEO_CATS[v.c].label}</span>
+                        <h3 class="font-bold text-mf-head leading-snug">${v.t}</h3>
                     </div>
                 </a>`).join('');
             document.getElementById('vEmpty').classList.toggle('hidden', list.length > 0);
@@ -682,7 +695,7 @@
 
         document.getElementById('waFloat').href = waLink();
         document.getElementById('footerSocial').innerHTML = Object.entries(CONTACT).filter(([, v]) => v).map(([k, v]) =>
-            `<a href="${v}" target="_blank" rel="noopener noreferrer" aria-label="${CONTACT_META[k][0]}" title="${CONTACT_META[k][0]}" class="w-10 h-10 rounded-full border border-mf-line text-mf-navy flex items-center justify-center hover:bg-mf-blue hover:text-white hover:border-mf-blue transition"><i class="${CONTACT_META[k][1]}"></i></a>`).join('');
+            `<a href="${v}" target="_blank" rel="noopener noreferrer" aria-label="${CONTACT_META[k][0]}" title="${CONTACT_META[k][0]}" class="w-10 h-10 rounded-full border border-mf-line text-mf-head flex items-center justify-center hover:bg-mf-blue hover:text-white hover:border-mf-blue transition"><i class="${CONTACT_META[k][1]}"></i></a>`).join('');
     </script>
 
     <script>
@@ -691,19 +704,20 @@
     const cv = document.getElementById('bgNet');
     if (!cv) return;
     const ctx = cv.getContext('2d');
+    const fx = document.getElementById('fxNet'), fctx = fx.getContext('2d');
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const coarse = matchMedia('(pointer: coarse)').matches;
 
     /* ألوان المنصة */
-    const PAL = { blue: [37, 84, 199], indigo: [54, 78, 168], mint: [114, 198, 84], amber: [246, 174, 30], navy: [15, 42, 107] };
+    const PAL = { blue: [88, 134, 255], indigo: [116, 138, 232], mint: [114, 198, 84], amber: [246, 174, 30], navy: [15, 42, 107] };
     const ALT = { blue: 'mint', indigo: 'amber', mint: 'blue', amber: 'indigo' };   // لون التفاعل لكل قسم
     const THEME = { calculator: 'indigo', steps: 'mint', fees: 'amber', faq: 'blue', videos: 'indigo', contact: 'mint' };
 
     /* ثلاث طبقات للعمق (تراكب) */
     const LAYERS = [
-        { depth: .35, rMin: .8,  rMax: 1.5, a: .35, speed: .10, link: 110, share: .45 },
-        { depth: .70, rMin: 1.3, rMax: 2.2, a: .55, speed: .18, link: 135, share: .35 },
-        { depth: 1.0, rMin: 2.0, rMax: 3.2, a: .80, speed: .28, link: 160, share: .20 }
+        { depth: .35, rMin: .8,  rMax: 1.5, a: .45, speed: .10, link: 110, share: .45 },
+        { depth: .70, rMin: 1.3, rMax: 2.2, a: .65, speed: .18, link: 135, share: .35 },
+        { depth: 1.0, rMin: 2.0, rMax: 3.2, a: .9, speed: .28, link: 160, share: .20 }
     ];
 
     const mix = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
@@ -734,7 +748,7 @@
         const w = innerWidth, h = innerHeight;
         if (nodes.length && w === W && Math.abs(h - H) < 120) return;
         W = w; H = h; dpr = Math.min(2, devicePixelRatio || 1);
-        cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cv.width = fx.width = W * dpr; cv.height = fx.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); fctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         build();
         if (reduce) frame(performance.now());
     }
@@ -773,7 +787,7 @@
         ptr.ny += (ptr.nyT - ptr.ny) * Math.min(1, dt * 3);
         const R = 170 + ptr.hot * 60;
 
-        ctx.clearRect(0, 0, W, H);
+        ctx.clearRect(0, 0, W, H); fctx.clearRect(0, 0, W, H);
 
         for (const n of nodes) {
             const L = LAYERS[n.l];
@@ -826,31 +840,33 @@
             ctx.beginPath(); ctx.arc(n.px, n.py, r, 0, 6.283); ctx.fill();
         }
 
+        fctx.globalCompositeOperation = 'lighter';
         /* أثر المؤشر */
         for (let i = trail.length - 1; i >= 0; i--) if (ts - trail[i].t > 700) trail.splice(i, 1);
         for (let i = 0; i < trail.length; i++) {
             const p = trail[i], age = (ts - p.t) / 700;
-            ctx.fillStyle = rgba(alt, (1 - age) * .45);
-            ctx.beginPath(); ctx.arc(p.x, p.y, 3 * (1 - age) + .5, 0, 6.283); ctx.fill();
-            if (i > 0) { ctx.strokeStyle = rgba(alt, (1 - age) * .3); ctx.beginPath(); ctx.moveTo(trail[i - 1].x, trail[i - 1].y); ctx.lineTo(p.x, p.y); ctx.stroke(); }
+            fctx.fillStyle = rgba(alt, (1 - age) * .45);
+            fctx.beginPath(); fctx.arc(p.x, p.y, 3 * (1 - age) + .5, 0, 6.283); fctx.fill();
+            if (i > 0) { fctx.strokeStyle = rgba(alt, (1 - age) * .3); fctx.beginPath(); fctx.moveTo(trail[i - 1].x, trail[i - 1].y); fctx.lineTo(p.x, p.y); fctx.stroke(); }
         }
 
         /* موجات الضغط */
-        ctx.lineWidth = 2;
+        fctx.lineWidth = 2;
         for (let i = ripples.length - 1; i >= 0; i--) {
             const r = ripples[i], age = (ts - r.t0 - r.delay) / 900;
             if (age > 1) { ripples.splice(i, 1); continue; } if (age < 0) continue;
             const e = 1 - Math.pow(1 - age, 3);
-            ctx.strokeStyle = rgba(r.c, (1 - age) * .55);
-            ctx.beginPath(); ctx.arc(r.x, r.y, e * 170, 0, 6.283); ctx.stroke();
+            fctx.strokeStyle = rgba(r.c, (1 - age) * .55);
+            fctx.beginPath(); fctx.arc(r.x, r.y, e * 170, 0, 6.283); fctx.stroke();
         }
 
         /* شرارات */
         for (let i = sparks.length - 1; i >= 0; i--) {
             const s = sparks[i]; s.x += s.vx * dt; s.y += s.vy * dt; s.vx *= .96; s.vy *= .96; s.life -= dt * 1.2;
             if (s.life <= 0) { sparks.splice(i, 1); continue; }
-            ctx.fillStyle = rgba(s.c, s.life * .8); ctx.beginPath(); ctx.arc(s.x, s.y, 2.4 * s.life + .4, 0, 6.283); ctx.fill();
+            fctx.fillStyle = rgba(s.c, s.life * .8); fctx.beginPath(); fctx.arc(s.x, s.y, 2.4 * s.life + .4, 0, 6.283); fctx.fill();
         }
+        fctx.globalCompositeOperation = 'source-over';
 
         if (!reduce) requestAnimationFrame(frame);
     }
